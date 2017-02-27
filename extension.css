@@ -41,7 +41,8 @@
 }
 .edui-container {
 	box-sizing:content-box;
-	margin: 50px auto;
+	float: left;
+	min-height: 600px;
 }
 .edui-default .edui-editor {
 	border:1px solid #ddd;
@@ -162,4 +163,43 @@
 	border:1px solid #ddd;
 	border-radius:0;
 	-webkit-border-radius:0;
+}
+/* 主容器 */
+.mainContent {
+	width: 1000px;
+	min-height: 600px;
+	margin: 50px auto;
+}
+/* 插入样式库 */
+.styleContent {
+	position: fixed;
+    width: 370px;
+    height: 600px;
+    margin-left: 630px !important;
+    border: 1px solid #d4d4d4;
+    box-shadow: 2px 2px 5px #d3d6da;
+    overflow-x: hidden;
+    overflow-y: auto;  
+}
+.styleContent ul {
+ 	list-style-type: none; 
+    padding: 10px;
+    margin: 0;
+	overflow: hidden; 
+}
+.styleContent li {
+    list-style: none;
+    padding: 15px 6px;
+    margin: 3px 0;
+    margin-top: 10px;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+.styleContent li:hover {
+    border: 1px solid #fff;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 8px #ccc;
+    -webkit-box-shadow: 0px 0px 8px #ccc;
+    box-shadow: 0px 0px 8px #ccc;
+    background-color: white;
 }
