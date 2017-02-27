@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>Umeditor-Extension</title>
+<meta charset="utf-8">
+<link href="umeditor/themes/default/css/umeditor.css" rel="stylesheet">
+<link href="extension.css" rel="stylesheet">
+</head>
+<script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+<script charset="utf-8" src="umeditor/umeditor.config.js"></script>
+<script charset="utf-8" src="umeditor/umeditor.js"></script>
+<script src="umeditor/lang/zh-cn/zh-cn.js"></script>
+<!-- <script src="//cdn.bootcss.com/seajs/2.2.1/sea.js"></script> -->
+<body>
+<script type="text/plain" id="myEditor" style="width: 610px; height:350px;"></script>
+</body>
+<script>
+var toolbar_config = 'undo redo | removeformat horizontal | bold italic underline | forecolor backcolor fontsize | justifyleft justifycenter justifyright | insertorderedlist insertunorderedlist | link unlink image seniorstyle',
+	$myEditor = $('#myEditor'),
+	umImgText = UM.getEditor('myEditor',{
+    /* 传入配置参数,可配参数列表看umeditor.config.js */
+    toolbar: [toolbar_config]
+});
+var CLI_DOMAIN = "cli.im";
+	STATIC_SERVICE = "static.clewm.net/cli"
+setEditorBtn();
+function setEditorBtn(){
+	$('.edui-icon-image').html("<div class='editor-btn'>插入图片</div>");
+	$('.edui-icon-seniorstyle').html("<div class='editor-btn'>插入样式</div>");
+	$('.edui-icon-tellink').html("<div class='editor-btn'>插入电话</div>");
+}
+function toPreviewer(filechooser,dataUrl) {
+	var imgDom = '<img style="max-width:100%;" src="'+dataUrl+'">';
+	umImgText.setContent(imgDom,true);
+    filechooser.value = '';
+}
+
+function compress(img, fileType) {
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext('2d');
+
+    var width = img.width;
+    var height = img.height;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, width, height);
+
+    // 压缩
+    var base64data = canvas.toDataURL(fileType, 0.75);
+    canvas = ctx = null;
+
+    return base64data;
+}
+//引入高级编辑器
+// function insertSeniorStyle(obj) {
+//     var current_con = umImgText.getContent();//获得当前编辑器中内容
+//     seajs.use('//static.clewm.net/cli/js/senior_edit.js', function(senior) {
+//         senior.senior_edit(
+//             {
+//                 'savecallback':function(ret){
+//                     umImgText.setContent(ret);//写入内容
+//                 },
+//                 'current_con':current_con
+//             }
+//         );
+//     });
+// }
+</script>
+</html>
+
+

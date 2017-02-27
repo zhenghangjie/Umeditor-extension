@@ -1,0 +1,165 @@
+.uploading-cover {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.uploadfile {
+	opacity:0;
+	filter:alpha(opacity:0);
+	cursor:pointer;
+	position:absolute;
+	font-size:99px;
+	overflow:hidden;
+}
+/*富文本编辑器 Ueditor*/
+.toolbar-shadow {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #ffffff;
+    opacity: .65;
+    z-index: 1000;
+}
+.edui-default .edui-editor-toolbarboxouter {
+	background-image:none !important;
+	background-color:#fff !important;
+}
+.edui-default .edui-editor {
+	border:1px solid #ddd;
+}
+.edui-default .edui-editor-toolbarboxouter {
+	border-bottom:1px solid #ddd;
+}
+.edui-default .edui-editor-toolbarbox,.edui-default .edui-editor-toolbarboxouter {
+	box-shadow:none;
+	-webkit-box-shadow:none;
+}
+.edui-editor-toolbarboxinner {
+	background:#fff;
+}
+.edui-container {
+	box-sizing:content-box;
+	margin: 50px auto;
+}
+.edui-default .edui-editor {
+	border:1px solid #ddd;
+}
+.edui-toolbar {
+	box-shadow:none !important;
+}
+.edui-btn-toolbar {
+	background:#f7f7f7;
+	padding:8px 12px !important;
+}
+.editor-btn {
+	font-size: 0.8em;
+	color: #666;
+}
+.edui-editor-body .edui-body-container {
+	font-family:'microsoft yahei',arial,sans-serif;
+}
+.edui-btn-toolbar .edui-btn,.edui-btn-toolbar .edui-splitbutton {
+	padding:1px 2px;
+	margin-top:4px;
+	margin-bottom:4px;
+}
+.edui-toolbar .edui-separator {
+	margin:4px 5px;
+}
+.edui-btn-toolbar .edui-splitbutton .edui-btn {
+	padding:0;
+	margin:0;
+}
+.edui-btn-toolbar .edui-btn.edui-hover,.edui-btn-toolbar .edui-btn.edui-active {
+	padding:0 1px;
+	background-color:#d5e1f2;
+	border:1px solid #a3bde3;
+}
+.edui-splitbutton.edui-hover {
+	padding:0 1px;
+	background-color:#d5e1f2;
+	border:1px solid #a3bde3;
+}
+.edui-separator {
+	margin:0 5px;
+}
+/* 插入图片 hover */
+.edui-image-file:hover,.edui-btn-tellink:hover,.edui-btn-seniorstyle:hover {
+	cursor:pointer;
+}
+.edui-btn-image.edui-hover,.edui-btn-tellink.edui-hover,.edui-btn-seniorstyle.edui-hover {
+	padding:1px 2px !important;
+	border:0 !important;
+	background-color:#f7f7f7 !important;
+}
+.edui-btn-image.edui-hover .edui-icon-image {
+	background-position:-97px 0px !important;
+	background: #f8f8f8 !important;
+}
+/* 电话链接 hover */
+.edui-btn-tellink.edui-hover .edui-icon-tellink {
+	background-position:-97px -63px !important;
+	background: #f8f8f8 !important;
+}
+/* 插入样式 hover */
+.edui-btn-seniorstyle.edui-hover .edui-icon-seniorstyle {
+	background-position:-97px -32px !important;
+	background: #f8f8f8 !important;
+}
+/* 功能性按钮 */
+#modal-tellink-tip {
+	display:none;
+}
+.edui-btn-toolbar .edui-btn .edui-icon-image,.edui-btn-toolbar .edui-btn .edui-icon-tellink,.edui-btn-toolbar .edui-btn .edui-icon-seniorstyle {
+	width:94px !important;
+	height:28px !important;
+	line-height: 28px !important;
+	background: #ffffff !important;
+	border: 1px solid #ddd !important;
+	border-radius: 4px;
+	text-align: center;
+}
+.edui-icon-image span,.edui-icon-tellink span,.edui-icon-seniorstyle span {
+	font-size: 12px;
+	color: #212121;
+}
+.edui-btn-toolbar .edui-btn .edui-icon-image {
+	background-position:0px 0px !important;
+}
+.edui-btn-toolbar .edui-btn .edui-icon-seniorstyle {
+	background-position:0px -32px;
+}
+.edui-btn-toolbar .edui-btn .edui-icon-tellink {
+	background-position:0px -63px;
+}
+.edui-btn-toolbar .edui-btn-name-fontsize {
+	border:none;
+	margin:2px;
+}
+.edui-btn-toolbar .edui-btn-name-fontsize .edui-caret {
+	vertical-align:middle;
+	width:8px;
+	top:1px;
+}
+.edui-btn-name-fontsize .edui-button-label {
+	width:20px;
+	padding:2px 0;
+}
+.edui-btn-name-fontsize .edui-button-spacing {
+	padding:0;
+}
+.edui-editor-body a {
+	color:-webkit-link;
+	text-decoration:underline;
+	cursor:auto;
+}
+.edui-editor-iframeholder {
+	height:250px !important;
+}
+.edui-default .edui-editor {
+	border:1px solid #ddd;
+	border-radius:0;
+	-webkit-border-radius:0;
+}
