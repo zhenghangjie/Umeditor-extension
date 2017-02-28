@@ -10,147 +10,22 @@
 <script charset="utf-8" src="umeditor/umeditor.config.js"></script>
 <script charset="utf-8" src="umeditor/umeditor.js"></script>
 <script src="umeditor/lang/zh-cn/zh-cn.js"></script>
-<!-- <script src="//cdn.bootcss.com/seajs/2.2.1/sea.js"></script> -->
 <body>
 <div class="mainContent">
 	<script type="text/plain" id="myEditor" style="width: 610px; height:350px;"></script>
 	<div class="styleContent" id="styleContent">
-	
 	</div>
 </div>
 </body>
-<script>
-var toolbar_config = 'undo redo | removeformat horizontal | bold italic underline | forecolor backcolor fontsize | justifyleft justifycenter justifyright | insertorderedlist insertunorderedlist | link unlink image seniorstyle',
-	$myEditor = $('#myEditor'),
-	umImgText = UM.getEditor('myEditor',{
-    /* 传入配置参数,可配参数列表看umeditor.config.js */
-    toolbar: [toolbar_config]
-});
-// var CLI_DOMAIN = "cli.me";
-// 	STATIC_SERVICE = "static.clewm.net/cli"
-setEditorBtn();
-$("#styleContent").on("click","li",function(){
-	umImgText.execCommand('insertHtml', $(this).html(), true);
-});
-function setEditorBtn(){
-	$('.edui-icon-image').html("<div class='editor-btn'>插入图片</div>");
-	$('.edui-icon-seniorstyle').html("<div class='editor-btn'>插入样式</div>");
-	$('.edui-icon-tellink').html("<div class='editor-btn'>插入电话</div>");
-}
-function toPreviewer(filechooser,dataUrl) {
-	var imgDom = '<img style="max-width:100%;" src="'+dataUrl+'">';
-	umImgText.setContent(imgDom,true);
-    filechooser.value = '';
-}
+<script charset="utf-8" src="extension.js"></script>
+<script charset="utf-8" src="init.js"></script>
 
-function compress(img, fileType) {
-    var canvas = document.createElement("canvas");
-    var ctx = canvas.getContext('2d');
-
-    var width = img.width;
-    var height = img.height;
-
-    canvas.width = width;
-    canvas.height = height;
-
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, width, height);
-
-    // 压缩
-    var base64data = canvas.toDataURL(fileType, 0.75);
-    canvas = ctx = null;
-
-    return base64data;
-}
-// 引入高级编辑器
-function insertSeniorStyle(obj) {
-	$("#styleContent").html($("#templateList1").html());
-    // var current_con = umImgText.getContent();//获得当前编辑器中内容
-    // seajs.use('//static.cli.me/cli/js/senior_edit.js', function(senior) {
-    //     senior.senior_edit(
-    //         {
-    //             'savecallback':function(ret){
-    //                 umImgText.setContent(ret);//写入内容
-    //             },
-    //             'current_con':current_con
-    //         }
-    //     );
-    // });
-}
+<script type="text/html" id="imgUploadBtn">
+<div class="uploading-cover">
+<input class="uploadfile" id="upload_image" type="file" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp"/>
+</div>
 </script>
 <script type="text/html" id="templateList1">
-<ul class="template-list">
-<!-- 活动安排 -->
-<li title="点击插入此内容">
-	<section style="position:static;box-sizing: border-box;">
-		<section style="border: 1px solid #e2e2e2;line-height: 1.6em;">
-			<section style="padding-left: 10px; color:rgb(255, 255, 255);  text-align: center; font-size: 1.4em; font-weight: bold; line-height: 36px;  background-color: rgb(249, 110, 87);text-align: left;">
-				<span style="font-size:16px; font-style:normal">活动名称</span>
-			</section>
-			<section style="margin-top: 1.5em; text-align: left;">
-				<span class="icon-Wei_UI_clock_o" style="margin-left: 20px;font-size: 16px;color: #bbb"></span>
-				<section style="display: inline-block; width: 60%; padding: 0.2em; margin-left: 0.5em; font-size: 1em; font-style: normal; color: inherit;" data-width="60%">活动时间：2016年3月30日 </section>
-			</section>
-			<section style="margin-top: 1em; text-align: left;">
-				<span class="icon-Wei_UI_location" style="margin-left: 20px;font-size: 16px;color: #bbb"></span>
-				<section style="display: inline-block; width: 60%; padding: 0.2em; margin-left: 0.5em; font-size: 1em; color: inherit;" data-width="60%">活动地点：宁波某某某区</section>
-			</section>
-			<section style="display: inline-block;background-color: rgb(249, 110, 87); height: 2em; max-width: 100%;margin-top: 1.5em; line-height: 1em; box-sizing: border-box;">
-				<section style="height: 2em; max-width: 100%; padding: 0.5em 1em;color: rgb(255, 255, 255); white-space: nowrap; text-overflow: ellipsis; font-size: 1em; ">活动介绍</section>
-			</section>
-			<section style="padding: 1em; font-size: 1em; color: inherit;">1.展开关于新产品营销会议<br>2.代理商操作技术培训<br>3.技术总监对下阶段技术支持的安排<br></section>
-			<section style="display: inline-block;background-color: rgb(249, 110, 87); height: 2em; max-width: 100%;margin-top: 1.5em; line-height: 1em; box-sizing: border-box;">
-				<section style="height: 2em; max-width: 100%; padding: 0.5em 1em;color: rgb(255, 255, 255); white-space: nowrap; text-overflow: ellipsis; font-size: 1em; ">参加人员</section>
-			</section>
-			<section style="padding: 1em; font-size: 1em; color: inherit;">xx全体人员，xx全体代理商</section>
-		</section>
-		<section style="display: block; width: 0; height: 0; clear: both;"></section>
-	</section>
-</li>
-<li title="点击插入此内容">
-	<section>
-		<section style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; border: 0px none; font-size: 14px; font-family: 微软雅黑; word-wrap: break-word !important;">
-			<section style="margin: 10px auto; padding: 0px; max-width: 100%; box-sizing: border-box; border: 1px solid rgb(197, 200, 204); text-align: center; border-radius: 5px; box-shadow: rgb(255, 255, 255) 0px 1px 0px, rgb(197, 200, 204) 0px 2px 0px, rgb(255, 255, 255) 0px 3px 0px, rgb(197, 200, 204) 0px 4px 0px; word-wrap: break-word !important;">
-				<section style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; height: 25px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: rgb(197, 200, 204); border-radius: 4px 4px 0px 0px; word-wrap: break-word !important; background-color: rgb(219, 219, 221);">
-					<section style="margin: 2px 75% 0px 0px; padding: 0px; max-width: 100%; box-sizing: border-box; display: inline-block; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(173, 173, 173);">
-						<section style="margin: 30px 0px 0px; padding: 0px; max-width: 100%; box-sizing: border-box; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(222, 222, 222);"></section>
-						<section style="margin: -37px 0px 0px 3px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 8px; height: 30px; border: 1px solid rgb(202, 202, 202); border-radius: 3px; word-wrap: break-word !important; background-color: rgb(255, 255, 255);"></section>
-					</section>
-					<section style="margin:2px 0 0 0; padding: 0px; max-width: 100%; box-sizing: border-box; display: inline-block; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(173, 173, 173);">
-						<section style="margin: 30px 0px 0px; padding: 0px; max-width: 100%; box-sizing: border-box; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(222, 222, 222);"></section>
-						<section style="margin: -37px 0px 0px 3px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 8px; height: 30px; border: 1px solid rgb(202, 202, 202); border-radius: 3px; word-wrap: break-word !important; background-color: rgb(255, 255, 255);"></section>
-					</section>
-				</section>
-				<section style="margin: 40px 10px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;">
-					<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; clear: both; min-height: 1em; line-height: 24px; text-align: center; font-size:20px;word-wrap: break-word !important;">高级编辑器讨论会</p>
-					<p style="margin:0 auto; padding: 10px;margin-top: 10px; max-width: 100%; box-sizing: border-box; clear: both; text-align: left; font-size:14px;word-wrap: break-word !important;height: 40px;line-height: 40px;overflow: hidden;">
-						<span class="icon-Wei_UI_clock_o" style="color:#999;font-size:18px;"></span>
-						<span style="margin-left: 10px;">时间：2016.03.30 14:00</span>
-					</p>
-					<p style="margin:0 auto; padding: 10px; max-width: 100%; box-sizing: border-box; clear: both; text-align: left; font-size:14px;word-wrap: break-word !important;height: 40px;line-height: 40px;overflow: hidden;">
-						<span class="icon-Wei_UI_location" style="color:#999;font-size:18px;"></span>
-						<span style="margin-left: 10px;">地点：公司报告厅</span>
-					</p>
-					<p style="margin:0 auto; padding: 10px; max-width: 100%; box-sizing: border-box; clear: both; text-align: left; font-size:14px;word-wrap: break-word !important;height: 40px;line-height: 40px;overflow: hidden;">
-						<span class="icon-Wei_UI_user" style="color:#999;font-size:16px;"></span>
-						<span style="margin-left: 10px;">人员：张三丰、刘德华、张国荣、章子怡</span>
-					</p>
-				</section>
-			</section>
-		</section>
-	</section>
-</li>
-<li>
-	<section style="margin: 0px; padding: 0px; box-sizing: border-box; color: rgb(255, 255, 255); background-color: rgb(239, 112, 96);">
-	<section style="margin: 0px; padding: 0px; display: inline-block; width: 100%; box-sizing: border-box;" data-width="100%"><section style="margin: 10px;padding: 0px 0px 15px;box-sizing: border-box;background-color: rgb(255, 255, 255);border-radius: 10px;"><section style="margin: 0px; padding: 0px; display: inline-block; width: 100%; box-sizing: border-box;" data-width="100%"><section style="margin-left: 5px; padding: 0px; width: 10px; height: 10px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin-right: 5px; padding: 0px; width: 10px; height: 10px; border-radius: 50%; float: right; clear: none; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section></section><section style="margin: 0px; padding: 0px; text-align: center; box-sizing: border-box;"><section style="margin: 0px; padding: 0px; display: inline-block; box-sizing: border-box;"><section style="margin-top: 10px; padding: 0px; box-sizing: border-box; float: left;"><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px 3px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section></section><section style="margin: 0px 5px; padding: 0px; box-sizing: border-box; float: left; color: rgb(239, 112, 96); font-weight: bold;"><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(-10deg);-webkit-transform: rotate(-10deg);-moz-transform: rotate(-10deg);-o-transform: rotate(-10deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">活</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(10deg);-webkit-transform: rotate(10deg);-moz-transform: rotate(10deg);-o-transform: rotate(10deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">动</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(-15deg);-webkit-transform: rotate(-15deg);-moz-transform: rotate(-15deg);-o-transform: rotate(-15deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">细</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(5deg);-webkit-transform: rotate(5deg);-moz-transform: rotate(5deg);-o-transform: rotate(5deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">则</span></section><section style="margin: 0px; padding: 0px; color: rgb(255, 255, 255); width: 28px; height: 28px; line-height: 28px; border-radius: 50%; float: left; background-color: rgb(239, 112, 96);transform: rotate(5deg);-webkit-transform: rotate(5deg);-moz-transform: rotate(5deg);-o-transform: rotate(5deg);" data-width="28px"><span style="margin: 0px; font-size: 20px; color: #FFFFFF;">&amp;</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(5deg);-webkit-transform: rotate(5deg);-moz-transform: rotate(5deg);-o-transform: rotate(5deg);"><span style="margin: 0px; font-size: 18px; color: inherit;">FAQ</span></section></section><section style="margin-top: 10px; padding: 0px; box-sizing: border-box; float: left;"><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px 3px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section></section></section></section><section style="margin: 10px; padding: 0px; box-sizing: border-box;color: #000000;"><section class="135brush"><p>“留神你的心，奥雷里亚诺，”赫里内勒多·马尔克斯上校对他说，“你正在活活腐烂。”</p><br><p>——马尔克斯《百年孤独》</p><br><p><br></p></section></section></section></section></section>
-</li>
-<li>
-	<section style="margin-top: 0.5em; margin-bottom: 0.5em;">
-	<section style="border-radius: 0.5em 0.5em 0px 0px; color: rgb(255, 255, 255); background-color: rgb(127, 212, 207);"><section style="margin-right: 0%; margin-left: 0%;transform: translate3d(10px, 0px, 0px);-webkit-transform: translate3d(10px, 0px, 0px);-moz-transform: translate3d(10px, 0px, 0px);-o-transform: translate3d(10px, 0px, 0px);"><section style="display: inline-block;margin-left: 10px;"><section style="width: 0px; display: inline-block; vertical-align: top; border-right-width: 0.5em; border-right-style: solid; border-right-color: rgb(255, 255, 255); border-bottom-width: 1em; border-bottom-style: solid; border-bottom-color: rgb(255, 255, 255); border-left-width: 0.5em !important; border-left-style: solid !important; border-left-color: transparent !important; border-top-width: 1em !important; border-top-style: solid !important; border-top-color: transparent !important;"></section><section style="height: 2em; line-height: 2em; padding-right: 10px; padding-left: 10px; min-width: 6em; display: inline-block; vertical-align: top; text-align: center; color: rgb(127, 212, 207); background-color: rgb(255, 255, 255);"><section>推广有礼 |&nbsp;Yoki</section></section><section style="width: 0px; display: inline-block; vertical-align: top; border-left-width: 0.5em; border-left-style: solid; border-left-color: rgb(255, 255, 255); border-top-width: 1em; border-top-style: solid; border-top-color: rgb(255, 255, 255); border-right-width: 0.5em !important; border-right-style: solid !important; border-right-color: transparent !important; border-bottom-width: 1em !important; border-bottom-style: solid !important; border-bottom-color: transparent !important;"></section></section></section></section><section style="border-radius: 0px 0px 0.5em 0.5em; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: none solid solid; border-color: rgb(127, 212, 207); padding-right: 10px; padding-left: 10px;"><section><section><section style="line-height: 1.6; font-size: 10px;"><section><br></section></section></section></section><section style="margin-right: 0%; margin-left: 0%;"><section style="text-align: justify; padding: 5px 10px; font-size: 14px; letter-spacing: 0px; line-height: 1.8; color: rgb(62, 62, 62);"><section><span style="color: #7FD4CF; font-size: 16px;"><strong><span style="color: #7FD4CF;">邀请有礼：</span></strong><span style="color: #3E3E3E;"><span style="font-size: 14px;">邀请会员赠送3000积分</span><span style="font-size: 14px;">。</span></span></span></section></section></section><section style="margin-right: 0%; margin-bottom: 10px; margin-left: 0%;"><section style="padding: 5px 10px; font-size: 14px; letter-spacing: 0px; line-height: 1.8;"><section style="text-align: justify;"><span style="color: #7FD4CF; font-size: 16px;"><strong>寻代言人：</strong></span><span style="line-height: 1.8; text-align: left; color: #3E3E3E;">xx高级编辑器是一个在线图文编辑工具，大量节省您排版的时间，让工作更轻松高效。</span></section></section></section></section></section>
-</li>
-</ul>
+<ul class="template-list"><!--活动安排--><li title="点击插入此内容"><section style="position:static;box-sizing: border-box;"><section style="border: 1px solid #e2e2e2;line-height: 1.6em;"><section style="padding-left: 10px; color:rgb(255, 255, 255);  text-align: center; font-size: 1.4em; font-weight: bold; line-height: 36px;  background-color: rgb(249, 110, 87);text-align: left;"><span style="font-size:16px; font-style:normal">活动名称</span></section><section style="margin-top: 1.5em; text-align: left;"><span class="icon-Wei_UI_clock_o"style="margin-left: 20px;font-size: 16px;color: #bbb"></span><section style="display: inline-block; width: 60%; padding: 0.2em; margin-left: 0.5em; font-size: 1em; font-style: normal; color: inherit;"data-width="60%">活动时间：2016年3月30日</section></section><section style="margin-top: 1em; text-align: left;"><span class="icon-Wei_UI_location"style="margin-left: 20px;font-size: 16px;color: #bbb"></span><section style="display: inline-block; width: 60%; padding: 0.2em; margin-left: 0.5em; font-size: 1em; color: inherit;"data-width="60%">活动地点：宁波某某某区</section></section><section style="display: inline-block;background-color: rgb(249, 110, 87); height: 2em; max-width: 100%;margin-top: 1.5em; line-height: 1em; box-sizing: border-box;"><section style="height: 2em; max-width: 100%; padding: 0.5em 1em;color: rgb(255, 255, 255); white-space: nowrap; text-overflow: ellipsis; font-size: 1em; ">活动介绍</section></section><section style="padding: 1em; font-size: 1em; color: inherit;">1.展开关于新产品营销会议<br>2.代理商操作技术培训<br>3.技术总监对下阶段技术支持的安排<br></section><section style="display: inline-block;background-color: rgb(249, 110, 87); height: 2em; max-width: 100%;margin-top: 1.5em; line-height: 1em; box-sizing: border-box;"><section style="height: 2em; max-width: 100%; padding: 0.5em 1em;color: rgb(255, 255, 255); white-space: nowrap; text-overflow: ellipsis; font-size: 1em; ">参加人员</section></section><section style="padding: 1em; font-size: 1em; color: inherit;">xx全体人员，xx全体代理商</section></section><section style="display: block; width: 0; height: 0; clear: both;"></section></section></li><li title="点击插入此内容"><section><section style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; border: 0px none; font-size: 14px; font-family: 微软雅黑; word-wrap: break-word !important;"><section style="margin: 10px auto; padding: 0px; max-width: 100%; box-sizing: border-box; border: 1px solid rgb(197, 200, 204); text-align: center; border-radius: 5px; box-shadow: rgb(255, 255, 255) 0px 1px 0px, rgb(197, 200, 204) 0px 2px 0px, rgb(255, 255, 255) 0px 3px 0px, rgb(197, 200, 204) 0px 4px 0px; word-wrap: break-word !important;"><section style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; height: 25px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: rgb(197, 200, 204); border-radius: 4px 4px 0px 0px; word-wrap: break-word !important; background-color: rgb(219, 219, 221);"><section style="margin: 2px 75% 0px 0px; padding: 0px; max-width: 100%; box-sizing: border-box; display: inline-block; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(173, 173, 173);"><section style="margin: 30px 0px 0px; padding: 0px; max-width: 100%; box-sizing: border-box; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(222, 222, 222);"></section><section style="margin: -37px 0px 0px 3px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 8px; height: 30px; border: 1px solid rgb(202, 202, 202); border-radius: 3px; word-wrap: break-word !important; background-color: rgb(255, 255, 255);"></section></section><section style="margin:2px 0 0 0; padding: 0px; max-width: 100%; box-sizing: border-box; display: inline-block; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(173, 173, 173);"><section style="margin: 30px 0px 0px; padding: 0px; max-width: 100%; box-sizing: border-box; height: 14px; width: 14px; border-radius: 7px; word-wrap: break-word !important; background-color: rgb(222, 222, 222);"></section><section style="margin: -37px 0px 0px 3px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 8px; height: 30px; border: 1px solid rgb(202, 202, 202); border-radius: 3px; word-wrap: break-word !important; background-color: rgb(255, 255, 255);"></section></section></section><section style="margin: 40px 10px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;"><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; clear: both; min-height: 1em; line-height: 24px; text-align: center; font-size:20px;word-wrap: break-word !important;">高级编辑器讨论会</p><p style="margin:0 auto; padding: 10px;margin-top: 10px; max-width: 100%; box-sizing: border-box; clear: both; text-align: left; font-size:14px;word-wrap: break-word !important;height: 40px;line-height: 40px;overflow: hidden;"><span class="icon-Wei_UI_clock_o"style="color:#999;font-size:18px;"></span><span style="margin-left: 10px;">时间：2016.03.30 14:00</span></p><p style="margin:0 auto; padding: 10px; max-width: 100%; box-sizing: border-box; clear: both; text-align: left; font-size:14px;word-wrap: break-word !important;height: 40px;line-height: 40px;overflow: hidden;"><span class="icon-Wei_UI_location"style="color:#999;font-size:18px;"></span><span style="margin-left: 10px;">地点：公司报告厅</span></p><p style="margin:0 auto; padding: 10px; max-width: 100%; box-sizing: border-box; clear: both; text-align: left; font-size:14px;word-wrap: break-word !important;height: 40px;line-height: 40px;overflow: hidden;"><span class="icon-Wei_UI_user"style="color:#999;font-size:16px;"></span><span style="margin-left: 10px;">人员：张三丰、刘德华、张国荣、章子怡</span></p></section></section></section></section></li><li><section style="margin: 0px; padding: 0px; box-sizing: border-box; color: rgb(255, 255, 255); background-color: rgb(239, 112, 96);"><section style="margin: 0px; padding: 0px; display: inline-block; width: 100%; box-sizing: border-box;"data-width="100%"><section style="margin: 10px;padding: 0px 0px 15px;box-sizing: border-box;background-color: rgb(255, 255, 255);border-radius: 10px;"><section style="margin: 0px; padding: 0px; display: inline-block; width: 100%; box-sizing: border-box;"data-width="100%"><section style="margin-left: 5px; padding: 0px; width: 10px; height: 10px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin-right: 5px; padding: 0px; width: 10px; height: 10px; border-radius: 50%; float: right; clear: none; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section></section><section style="margin: 0px; padding: 0px; text-align: center; box-sizing: border-box;"><section style="margin: 0px; padding: 0px; display: inline-block; box-sizing: border-box;"><section style="margin-top: 10px; padding: 0px; box-sizing: border-box; float: left;"><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px 3px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section></section><section style="margin: 0px 5px; padding: 0px; box-sizing: border-box; float: left; color: rgb(239, 112, 96); font-weight: bold;"><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(-10deg);-webkit-transform: rotate(-10deg);-moz-transform: rotate(-10deg);-o-transform: rotate(-10deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">活</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(10deg);-webkit-transform: rotate(10deg);-moz-transform: rotate(10deg);-o-transform: rotate(10deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">动</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(-15deg);-webkit-transform: rotate(-15deg);-moz-transform: rotate(-15deg);-o-transform: rotate(-15deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">细</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(5deg);-webkit-transform: rotate(5deg);-moz-transform: rotate(5deg);-o-transform: rotate(5deg);"><span style="margin: 0px; font-size: 20px; color: inherit;">则</span></section><section style="margin: 0px; padding: 0px; color: rgb(255, 255, 255); width: 28px; height: 28px; line-height: 28px; border-radius: 50%; float: left; background-color: rgb(239, 112, 96);transform: rotate(5deg);-webkit-transform: rotate(5deg);-moz-transform: rotate(5deg);-o-transform: rotate(5deg);"data-width="28px"><span style="margin: 0px; font-size: 20px; color: #FFFFFF;">&amp;</span></section><section style="margin: 0px; padding: 0px; color: inherit; float: left;transform: rotate(5deg);-webkit-transform: rotate(5deg);-moz-transform: rotate(5deg);-o-transform: rotate(5deg);"><span style="margin: 0px; font-size: 18px; color: inherit;">FAQ</span></section></section><section style="margin-top: 10px; padding: 0px; box-sizing: border-box; float: left;"><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px 3px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section><section style="margin: 0px; padding: 0px; width: 5px; height: 5px; border-radius: 50%; float: left; color: rgb(255, 255, 255); box-sizing: border-box; background-color: rgb(239, 112, 96);"></section></section></section></section><section style="margin: 10px; padding: 0px; box-sizing: border-box;color: #000000;"><section class="135brush"><p>“留神你的心，奥雷里亚诺，”赫里内勒多·马尔克斯上校对他说，“你正在活活腐烂。”</p><br><p>——马尔克斯《百年孤独》</p><br><p><br></p></section></section></section></section></section></li><li><section style="margin-top: 0.5em; margin-bottom: 0.5em;"><section style="border-radius: 0.5em 0.5em 0px 0px; color: rgb(255, 255, 255); background-color: rgb(127, 212, 207);"><section style="margin-right: 0%; margin-left: 0%;transform: translate3d(10px, 0px, 0px);-webkit-transform: translate3d(10px, 0px, 0px);-moz-transform: translate3d(10px, 0px, 0px);-o-transform: translate3d(10px, 0px, 0px);"><section style="display: inline-block;margin-left: 10px;"><section style="width: 0px; display: inline-block; vertical-align: top; border-right-width: 0.5em; border-right-style: solid; border-right-color: rgb(255, 255, 255); border-bottom-width: 1em; border-bottom-style: solid; border-bottom-color: rgb(255, 255, 255); border-left-width: 0.5em !important; border-left-style: solid !important; border-left-color: transparent !important; border-top-width: 1em !important; border-top-style: solid !important; border-top-color: transparent !important;"></section><section style="height: 2em; line-height: 2em; padding-right: 10px; padding-left: 10px; min-width: 6em; display: inline-block; vertical-align: top; text-align: center; color: rgb(127, 212, 207); background-color: rgb(255, 255, 255);"><section>推广有礼|&nbsp;Yoki</section></section><section style="width: 0px; display: inline-block; vertical-align: top; border-left-width: 0.5em; border-left-style: solid; border-left-color: rgb(255, 255, 255); border-top-width: 1em; border-top-style: solid; border-top-color: rgb(255, 255, 255); border-right-width: 0.5em !important; border-right-style: solid !important; border-right-color: transparent !important; border-bottom-width: 1em !important; border-bottom-style: solid !important; border-bottom-color: transparent !important;"></section></section></section></section><section style="border-radius: 0px 0px 0.5em 0.5em; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: none solid solid; border-color: rgb(127, 212, 207); padding-right: 10px; padding-left: 10px;"><section><section><section style="line-height: 1.6; font-size: 10px;"><section><br></section></section></section></section><section style="margin-right: 0%; margin-left: 0%;"><section style="text-align: justify; padding: 5px 10px; font-size: 14px; letter-spacing: 0px; line-height: 1.8; color: rgb(62, 62, 62);"><section><span style="color: #7FD4CF; font-size: 16px;"><strong><span style="color: #7FD4CF;">邀请有礼：</span></strong><span style="color: #3E3E3E;"><span style="font-size: 14px;">邀请会员赠送3000积分</span><span style="font-size: 14px;">。</span></span></span></section></section></section><section style="margin-right: 0%; margin-bottom: 10px; margin-left: 0%;"><section style="padding: 5px 10px; font-size: 14px; letter-spacing: 0px; line-height: 1.8;"><section style="text-align: justify;"><span style="color: #7FD4CF; font-size: 16px;"><strong>寻代言人：</strong></span><span style="line-height: 1.8; text-align: left; color: #3E3E3E;">xx高级编辑器是一个在线图文编辑工具，大量节省您排版的时间，让工作更轻松高效。</span></section></section></section></section></section></li></ul>
 </script>
 </html>
-
-

@@ -10569,6 +10569,7 @@ UM.registerUI('link video map formula',function(name){
     });
     return $btn;
 });
+
 UM.registerUI( 'emotion formula', function( name ){
     var me = this,
         url  = me.options.UMEDITOR_HOME_URL + 'dialogs/' +name+ '/'+name+'.js';
@@ -10590,10 +10591,9 @@ UM.registerUI( 'emotion formula', function( name ){
         };
         //调整数据
         var data = UM.getWidgetData(name);
-
-if(typeof data === undefined) {
-    return false;
-}
+        if(typeof data === undefined) {
+            return false;
+        }
         data.width && (opt.width = data.width);
         data.height && (opt.height = data.height);
 
@@ -10619,8 +10619,8 @@ if(typeof data === undefined) {
         });
     });
     return $btn;
+});
 
-} );
 UM.registerUI('imagescale',function () {
     var me = this,
         $imagescale;
@@ -10697,6 +10697,7 @@ UM.registerUI('imagescale',function () {
 
     }
 });
+
 UM.registerUI('autofloat',function(){
     var me = this,
         lang = me.getLang();
@@ -10852,9 +10853,8 @@ UM.registerUI('autofloat',function(){
             })
         }
     })
-
-
 });
+
 UM.registerUI('source',function(name){
     var me = this;
     me.addListener('fullscreenchanged',function(){
@@ -11048,9 +11048,7 @@ UM.registerUI('paragraph fontfamily fontsize', function( name ) {
         return options;
 
     }
-
 });
-
 
 UM.registerUI('forecolor backcolor', function( name ) {
     function getCurrentColor() {
@@ -11115,127 +11113,5 @@ UM.registerUI('forecolor backcolor', function( name ) {
         });
 
     return $btn;
-
 });
-
-UM.registerUI('pasteplain',
-    function(name) {
-        var me = this;
-        var $btn = $.eduibutton({
-            icon : name,
-            click : function(){
-                me.execCommand(name);
-            },
-            title: this.getLang('labelMap')[name] || ''
-        });
-
-        this.addListener('selectionchange',function(){
-            var state = this.queryCommandState(name);
-            $btn.edui().disabled(state == -1).active(state == 1)
-        });
-        return $btn;
-    }
-);
-// 产品码专属 电话链接
-UM.registerUI('tellink',
-    function(name) {
-        var me = this,
-            href;
-        var $btn = $.eduibutton({
-            icon : name,
-            click : function(){
-                $("#modal-tellink").modal("show");
-            }
-        });
-        $("#modal-tellink-confirm").click(function(){
-            href = $("#modal-tellink-input").val();
-            $("#modal-tellink").modal("hide");
-            $(".empty_placeholder").remove();
-            me.execCommand("inserthtml","<a href='tel:"+href+"' _href='tel:"+href+"' target='_self'>"+href+"</a>","needFilter");
-        });
-        this.addListener('selectionchange',function(){
-            var state = this.queryCommandState(name);
-            $btn.edui().disabled(state == -1).active(state == 1)
-        });
-        return $btn;
-    }
-);
-// 插入样式（高级编辑器）
-UM.registerUI('seniorstyle',
-    function(name) {
-        var me = this,
-            href;
-        var $btn = $.eduibutton({
-            icon : name,
-            click : function(){
-                insertSeniorStyle($btn);    //引入高级编辑器方法
-            }
-        });
-        this.addListener('selectionchange',function(){
-            var state = this.queryCommandState(name);
-            $btn.edui().disabled(state == -1).active(state == 1)
-        });
-        return $btn;
-    }
-);
-/**
- * 独立注册图片上传组件
- * by zhj   
- */
-UM.registerUI('image',function(name){
-    var me = this, currentRange, $dialog,
-        opt = {
-            title: (me.options.labelMap &&me.options.labelMap[name]) || me.getLang("labelMap." + name),
-            url: me.options.UMEDITOR_HOME_URL + 'dialogs/' + name + '/' + name + '.js'
-        };
-    var $btn = $.eduibutton({
-        icon: name
-    });
-    //加载模版数据
-    utils.loadFile(document,{
-        src: opt.url,
-        tag: "script",
-        type: "text/javascript",
-        defer: "defer"
-    },function(){
-        // 图片直接上传功能(文件上传模板渲染)
-        var uploadTpl = '<div class="uploading-cover"><input class="uploadfile" id="upload_image" type="file" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp"/></div>';
-        // 单图上传
-        $('.edui-btn-image').append(uploadTpl);
-        // 调用通用上传服务
-        var filechooser = document.getElementById('upload_image');
-        // 200 KB 对应的字节数
-        var maxsize = 200 * 1024;
-        filechooser.onchange = function() {
-            var files = this.files;
-            var file = files[0];
-            // 接受 jpeg, jpg, png 类型的图片
-            if (!/\/(?:jpeg|jpg|png)/i.test(file.type)) return;
-            var reader = new FileReader();
-            reader.onload = function() {
-                var result = this.result;
-                var img = new Image();
-                // 如果图片小于 200kb，不压缩
-                if (result.length <= maxsize) {
-                    toPreviewer(filechooser,result);
-                    return;
-                }
-                img.onload = function() {
-                    var compressedDataUrl = compress(img, file.type);
-                    toPreviewer(compressedDataUrl);
-                    img = null;
-                };
-
-                img.src = result;
-            };
-            reader.readAsDataURL(file);
-        };
-    });
-    me.addListener('selectionchange', function () {
-        var state = this.queryCommandState(name);
-        $btn.edui().disabled(state == -1).active(state == 1)
-    });
-    return $btn;
-});
-
 })(jQuery)
